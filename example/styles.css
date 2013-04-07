@@ -1,0 +1,20 @@
+
+#overlay {
+	background: #333;
+	position:fixed;
+	top:0;
+	left:0;
+	height:100%;
+	width:100%;
+	opacity: 0.8;
+	display:none;
+}
+
+#wag {
+	background: #fff;
+}
+
+.insideModal {
+	position:absolute;
+	z-index: 9999999;
+}
