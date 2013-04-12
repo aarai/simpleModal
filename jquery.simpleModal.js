@@ -12,7 +12,7 @@
 				'afterFadeOut': foo,
 			}, options);
 
-			var $that = this, iframe, $trigger, $overlay;
+			var $that = this, iframe, $trigger, $overlay, $closeBtn;
 
 			$that.addClass('insideModal');
 			$that.css({"height": settings.height,
@@ -37,7 +37,21 @@
 				alert(this.id);
 			}
 
+			var hide = function(el) {
+				el.click(function(e){
+						$("#overlay, #close-btn").fadeOut(settings.fadeOut,function(){
+							$that.hide();
+							$that.empty();
+							if(settings.afterFadeOut != null){
+							settings.afterFadeIn.call();
+						}
+					});
+					e.preventDefault();
+				});
+			}
+
 			$overlay = $('<div id="overlay" />');
+			$closeBtn = $('<a id="close-btn" href="#">Click</a>');
 
 			$trigger.click(function(){
 				if(settings.type !== 'div'){
@@ -48,25 +62,19 @@
 										});
 					$that.html(iframe);
 				}
-				$overlay.fadeIn(settings.fadeIn, function(){
+				$("#overlay, #close-btn").fadeIn(settings.fadeIn, function(){
 					$that.show();
 					if(settings.afterFadeIn != null){
 						settings.afterFadeIn.call();
 					}
 				});
+				$that.prepend($closeBtn);
 				return false;
 			});
 
 			$('body').append($overlay);
-				$overlay.click(function(){
-					$(this).fadeOut(settings.fadeOut,function(){
-						$that.hide();
-						$that.empty();
-						if(settings.afterFadeOut != null){
-						settings.afterFadeIn.call();
-					}
-				});
-			});
+			hide($overlay);	
+			hide($closeBtn);
 
 			$(document).keyup(function(e) {
 					if ($overlay.is(':visible') && e.which == 27) {
