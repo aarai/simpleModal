@@ -8,8 +8,8 @@
 				'trigger': 'modal',
 				'fadeIn': 200,
 				'fadeOut': 400,
-				'afterFadeIn': null,
-				'afterFadeOut': foo,
+				'afterFadeIn': null
+			// add callback functionality	'afterFadeOut': foo,
 			}, options);
 
 			var $that = this, iframe, $trigger, $overlay, $closeBtn;
@@ -32,10 +32,6 @@
 			$(window).on('resize', center);
 
 			$that.hide();
-
-			var foo = function(){
-				alert(this.id);
-			}
 
 			var hide = function(el) {
 				el.click(function(e){
